@@ -1,0 +1,76 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="container" class="container">
+      <div id="healthbar-container" class="healthbar-container">
+        <input type="range" v-bind:max="600" v-bind:min="3" v-model="value" />
+        {{ this.value }}
+        <div class="bossSelect-container">
+          <label for="bossSelect">Select Boss: </label>
+          <select
+            name="bossSelect"
+            id="bossSelect"
+            class="bossSelect-input"
+            v-model="bossSelect"
+          >
+            <option value="ravager">Ravager (Hp: 100)</option>
+            <option value="dragon">Dragon (Hp: 200)</option>
+            <option value="wither">Wither (Hp: 600)</option>
+          </select>
+        </div>
+        <canvas-healthbar></canvas-healthbar>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+  <script type="text/javascript" src="debounce.js"></script>
+  <script type="text/javascript" src="canvas-healthbar.js"></script>
+  <script>
+    new Vue({
+      el: "#healthbar-container",
+      data: {
+        bossSelect: "",
+        value: 120,
+        sprite: "./images/EntityCSS.png",
+        ravager: {
+          min: { spriteX: 8, spriteY: 10, health: 0, name: "Puff Fish" },
+          max: { spriteX: 4, spriteY: 11, health: 100, name: "Ravager" },
+        },
+        dragon: {
+          min: { spriteX: 8, spriteY: 10, health: 3, name: "Puff Fish" },
+          max: { spriteX: 4, spriteY: 2, health: 200, name: "Ender Dragon" },
+        },
+        wither: {
+          min: { spriteX: 8, spriteY: 10, health: 3, name: "Puff Fish" },
+          max: { spriteX: 0, spriteY: 5, health: 600, name: "Wither" },
+        },
+        font: "courier",
+      },
+      methods: {
+        getSelectedBoss: function () {
+          if (this.value > 3 && this.value <= 100) {
+            this.bossSelect = "ravager";
+          } else if (this.value > 100 && this.value <= 200) {
+            this.bossSelect = "dragon";
+          } else if (this.value > 200 && this.value <= 600) {
+            this.bossSelect = "wither";
+          }
+        },
+      },
+      watch: {
+        value: function () {
+          this.getSelectedBoss();
+        },
+      },
+      created: function () {
+        this.getSelectedBoss();
+      },
+      mounted: function () {
+        this.getSelectedBoss();
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,29 @@
+.container {
+  max-width: 500;
+  margin: 100px auto;
+}
+
+.healthbar-container {
+  max-width: 500px;
+  height: 100;
+  background-color: #1d2333;
+  color: white;
+}
+
+.bossSelect-container {
+  margin: 5% 0 0 5%;
+  font-size: 1.2rem;
+  color: white;
+
+  font-family: monospace;
+}
+.bossSelect-input {
+  font-size: 0.8rem;
+}
+
+#healthbar {
+  background-color: #1d2333;
+}
+
+canvas {
+}
